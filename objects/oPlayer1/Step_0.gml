@@ -8,9 +8,10 @@ if ((isRoom("rTitle") or isRoom("rHighscores")) and
     else global.plife = 4;
 }
 
+// MOD: Keep the 99-health cap and provide unlimited bombs and ropes.
 if (global.plife > 99) global.plife = 99;
-if (global.bombs > 99) global.bombs = 99;
-if (global.rope > 99) global.rope = 99;
+global.bombs = 99;
+global.rope = 99;
 
 if (global.hasCape and not instance_exists(oCape)) instance_create(x, y, oCape);
 
@@ -987,7 +988,6 @@ else if (inGame and kItemPressed and not whipping)
             {
                 holdItem = instance_create(x, y, oRopeThrow);
                 holdItem.held = true;
-                global.rope -= 1;
                 whoaTimer = whoaTimerMax;
             }
             else
@@ -1026,14 +1026,12 @@ else if (inGame and kItemPressed and not whipping)
                 holdItem = instance_create(x, y, oBomb);
                 if (global.hasStickyBombs) holdItem.sticky = true;
                 holdItem.held = true;
-                global.bombs -= 1;
                 whoaTimer = whoaTimerMax;
             }
             else if (global.rope > 0)
             {
                 holdItem = instance_create(x, y, oRopeThrow);
                 holdItem.held = true;
-                global.rope -= 1;
                 whoaTimer = whoaTimerMax;
             }
         }
@@ -1045,14 +1043,12 @@ else if (inGame and kItemPressed and not whipping)
             holdItem = instance_create(x, y, oBomb);
             if (global.hasStickyBombs) holdItem.sticky = true;
             holdItem.held = true;
-            global.bombs -= 1;
             whoaTimer = whoaTimerMax;
         }
         else if (global.rope > 0)
         {
             holdItem = instance_create(x, y, oRopeThrow);
             holdItem.held = true;
-            global.rope -= 1;
             whoaTimer = whoaTimerMax;
         }
     }
@@ -1126,7 +1122,6 @@ else if (inGame and kRopePressed and global.rope > 0 and not whipping)
                 falling = true;
                 xVel = 0;
                 yVel = 0;
-                global.rope -= 1;
                 playSound(global.sndThrow);
             }
         }
@@ -1139,7 +1134,6 @@ else if (inGame and kRopePressed and global.rope > 0 and not whipping)
         obj.py = y;
         obj.xVel = 0;
         obj.yVel = -12;
-        global.rope -= 1;
         playSound(global.sndThrow);
     }
     }
@@ -1185,7 +1179,6 @@ else if (inGame and kBombPressed and global.bombs > 0 and not whipping)
         obj.yVel = 3;
     }
     
-    global.bombs -= 1;
     playSound(global.sndThrow);
 }
 else if (holdItem == 0)
