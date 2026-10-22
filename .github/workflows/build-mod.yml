@@ -27,8 +27,9 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-            - name: Build the browser game
+      - name: Build the browser game
         run: npx --yes @gamemaker/gm-cli@latest package --target=operagx --toolchain=gms2@2024.14.3.260 --output=spelunky-mod.zip
+
       - name: Save the build for download
         uses: actions/upload-artifact@v4
         with:
