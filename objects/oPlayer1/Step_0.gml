@@ -1819,7 +1819,9 @@ if (dead and deadCounter > 0) deadCounter -= 1;
 
 if (isLevel() or isRoom("rSun") or isRoom("rMoon") or isRoom("rStars"))
 {
-    if (not dead and global.plife < 1)
+       // MOD: Keep health at 99     
+	   if (not dead) global.plife = 99;     
+       if (not dead and global.plife < 1)
     {
         if (global.hasAnkh)
         {
