@@ -3,6 +3,17 @@ if (isRoom("rTitle") or isRoom("rHighscores"))
 {
     if (global.isTunnelMan) global.plife = 2;
     else global.plife = 4;
+
+	//Allow the next run to receieve 99 health
+	global.mod99LivesSet = false;
+}
+
+	// give 99 health once per turn
+	if ((ilLevel() or isRoom("rSun") or isRoom("rMoon") or isRoom("rStars"))
+		and not global.mod99LivesSet)
+{
+	global.pLife = 99;
+	global.mod99LivesSet = true;
 }
 
 if (global.plife > 99) global.plife = 99;
@@ -1819,8 +1830,6 @@ if (dead and deadCounter > 0) deadCounter -= 1;
 
 if (isLevel() or isRoom("rSun") or isRoom("rMoon") or isRoom("rStars"))
 {
-       // MOD: Keep health at 99     
-	   if (not dead) global.plife = 99;     
        if (not dead and global.plife < 1)
     {
         if (global.hasAnkh)
