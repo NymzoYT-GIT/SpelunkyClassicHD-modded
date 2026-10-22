@@ -786,7 +786,7 @@ if (not dead and
         if (holdItem.type == "Gold Idol")
         {
             if (isRealLevel()) global.idolsConverted += 1;
-            global.money += holdItem.value*(global.levelType+1);
+            global.money += 25 * holdItem.value * (global.levelType + 1);
             if (holdItem.sprite_index == sCrystalSkull) global.skulls += 1;
             else global.idols += 1;
             playSound(global.sndCoin);
@@ -1978,7 +1978,7 @@ if (collision_rectangle(x-8, y-8, x+8, y+8, oTreasure, 0, 0) and not dead and no
     if (gem.canCollect)
     {
         // global.money += gem.value;
-        global.collect += 5 * (gem.value + ceil(gem.value / 4) * global.levelType);
+        global.collect += 25 * (gem.value + ceil(gem.value / 4) * global.levelType);
         global.collectCounter += 20;
         if (global.collectCounter > 100) global.collectCounter = 100;
         
@@ -2058,7 +2058,7 @@ if (collision_point(x, y, oExit, 0, 0))
         if (holdItem.type == "Gold Idol")
         {
             if (isRealLevel()) global.idolsConverted += 1;
-            global.collect += 5 * holdItem.value * (global.levelType + 1);
+            global.collect += 25 * holdItem.value * (global.levelType + 1);
             global.collectCounter += 20;
             if (global.collectCounter > 100) global.collectCounter = 100;
             if (holdItem.sprite_index == sCrystalSkull) global.skulls += 1;
