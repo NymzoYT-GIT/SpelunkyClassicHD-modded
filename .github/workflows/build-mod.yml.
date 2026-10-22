@@ -1,0 +1,35 @@
+
+name: Build Spelunky Classic HD Mod
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Get source code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Build the browser game
+        run: npx --yes @gamemaker/gm-cli@latest package --target=operagx --toolchain=gms2@2024.14.3.260 --output=spelunky-mod.zip
+
+      - name: Save the build for download
+        uses: actions/upload-artifact@v4
+        with:
+          name: spelunky-mod-build
+          path: spelunky-mod.zip
+          if-no-files-found: error
